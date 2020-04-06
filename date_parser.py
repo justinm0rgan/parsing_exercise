@@ -17,5 +17,18 @@ class DateParser:
         The following check is equivalent
         parsed_date == datetime.datetime(2020, 04, 11, 0 0)
         '''
-        pass
-        
+        try:
+            if "-" in self.date_str:
+                return datetime.strptime(self.date_str, '%Y-%m-%d')
+            elif "_" in self.date_str:
+                return datetime.strptime(self.date_str, '%Y_%m_%d')
+            elif "/" in self.date_str:
+                return datetime.strptime(self.date_str, '%Y/%m/%d')
+        except ValueError:
+            if "-" in self.date_str:
+                return datetime.strptime(self.date_str, '%m-%d-%Y')
+            elif "_" in self.date_str:
+                return datetime.strptime(self.date_str, '%m_%d_%Y')
+            elif "/" in self.date_str:
+                return datetime.strptime(self.date_str, '%m/%d/%Y')
+           
